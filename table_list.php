@@ -10,51 +10,73 @@
     <title>Document</title>
 </head>
 <body>
+<!--Navbar-->
 <?php include("navbar_table_list.php")?>
+<!--Check post add SP-->
 <?php
-if (isset($_GET['TenSP'])) {
-    $tensp = $_GET['TenSP'];
+if (isset($_POST['TenSP'])) {
+    $tensp = $_POST['TenSP'];
 }
-if (isset($_GET['Gia'])) {
-    $gia = $_GET['Gia'];
+if (isset($_POST['Gia'])) {
+    $gia = $_POST['Gia'];
 }
-if (isset($_GET['Mota'])) {
-    $mota = $_GET['Mota'];
+if (isset($_POST['Mota'])) {
+    $mota = $_POST['Mota'];
 }
-if (isset($_GET['NCC'])) {
-    $ncc = $_GET['NCC'];
+if (isset($_POST['NCC'])) {
+    $Ncc = $_POST['NCC'];
+}
+?>
+<!--Check suaSP-->
+<?php
+if (isset($_POST['id_Edit'])) {
+    $id_Edit = $_POST['id_Edit'];
 }
 
+if (isset($_POST['TenSP_Edit'])) {
+    $tensp_Edit = $_POST['TenSP_Edit'];
+}
+if (isset($_POST['Gia_Edit'])) {
+    $gia_Edit = $_POST['Gia_Edit'];
+}
+if (isset($_POST['Mota_Edit'])) {
+    $mota_Edit = $_POST['Mota_Edit'];
+}
+if (isset($_POST['NCC_Edit'])) {
+    $Ncc_Edit = $_POST['NCC_Edit'];
+}
 ?>
+<!--Conect database-->
 <?php
     $danhsachSP=[];
-    $danhsachSP[]=[
-            "name"=>"SP1",
-            "price"=>"10000",
-            "desc"=>"con hang",
-            "brand"=>"brand1"
-    ];
-    $danhsachSP[]=[
-            "name"=>"SP2",
-            "price"=>"20000",
-            "desc"=>"con hang",
-            "brand"=>"brand2"
-    ];
-    $danhsachSP[]=[
-            "name"=>"SP3",
-            "price"=>"30000",
-            "desc"=>"con hang",
-            "brand"=>"brand3"
-    ];
-
-if (isset($_GET['TenSP']) && isset($_GET['Gia']) && isset($_GET['Mota']) && isset($_GET['NCC'])) {
-
-    $danhsachSP[] = [
-        "name" => $tensp,
-        "price" => $gia,
-        "desc" => $mota,
-        "brand" => $ncc
-    ];
+    $servername="localhost";
+    $usename="root";
+    $password="";
+    $db="t2008m_php";
+    $conn=new mysqli($servername,$usename,$password,$db);
+    if($conn->connect_error){
+        die("Connect error.....");
+    }
+    $sql_text="Select * from sanpham";
+    $rs=$conn->query($sql_text);
+    if ($rs->num_rows>0){
+        while ($row = $rs->fetch_assoc()){
+            $danhsachSP[]=$row;
+        }
+    }
+//   Insert SP
+if (isset($_POST['TenSP']) && isset($_POST['Gia']) && isset($_POST['Mota']) && isset($_POST['NCC'])) {
+    $sql2_text="insert into sanpham(id,name,price,desct,ncc) value (null,'$tensp',$gia,'$mota','$Ncc')";
+    if ($conn->query($sql2_text)==true){
+        header("location:table_list.php");
+    }
+}
+//Update
+if (isset($_POST['id_Edit']) && isset($_POST['TenSP_Edit']) && isset($_POST['Gia_Edit']) && isset($_POST['Mota_Edit']) && isset($_POST['NCC_Edit'])) {
+    $sql3_text="update sanpham set name ='$tensp_Edit',price=$gia_Edit,desct='$mota_Edit',ncc='$Ncc_Edit' where id=$id_Edit";
+    if ($conn->query($sql3_text)==true){
+        header("location:table_list.php");
+    }
 }
 ?>
 <table class="table">
@@ -71,8 +93,8 @@ if (isset($_GET['TenSP']) && isset($_GET['Gia']) && isset($_GET['Mota']) && isse
     <tr>
             <th scope="row"><?php echo $ds["name"] ?></th>
             <td><?php echo $ds["price"] ?></td>
-            <td><?php echo $ds["desc"] ?></td>
-            <td><?php echo $ds["brand"] ?></td>
+            <td><?php echo $ds["desct"] ?></td>
+            <td><?php echo $ds["ncc"] ?><a href="suaSP.php?id= <?php echo $ds["id"]?>">Sua San Pham</a> </td>
     </tr>
     <?php } ?>
 

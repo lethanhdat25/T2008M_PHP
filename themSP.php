@@ -22,7 +22,7 @@
     </thead>
     <tbody>
         <tr>
-            <form name="formAdd" action="table_list.php" method="get">
+            <form name="formAdd" action="table_list.php" method="post">
                 <th scope="row">
                         <input placeholder="TenSP" name="TenSP">
                 </th>

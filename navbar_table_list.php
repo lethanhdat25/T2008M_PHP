@@ -9,9 +9,6 @@
             <li class="nav-item active">
                 <a class="nav-link" href="themSP.php">Thêm Sản Phẩm <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="suaSP.php">Sửa Sản Phẩm</a>
-            </li>
         </ul>
     </div>
 </nav>
