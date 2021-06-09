@@ -13,25 +13,12 @@
 <!--Navbar-->
 <?php include("navbar_table_list.php")?>
 <!--Conect database-->
+<?php include_once "databaseSP.php"?>
 <?php
 $id=$_GET["id"];
 $SP=null;
-$servername="localhost";
-$usename="root";
-$password="";
-$db="t2008m_php";
-$conn=new mysqli($servername,$usename,$password,$db);
-if($conn->connect_error){
-    die("Connect error.....");
-}
 $sql_text="Select * from sanpham where id= $id";
-$rs=$conn->query($sql_text);
-if ($rs->num_rows>0){
-    while ($row = $rs->fetch_assoc()){
-        $SP=$row;
-        break;
-    }
-}
+$SP=querydb($sql_text);
 ?>
 <table class="table">
     <thead>
@@ -45,19 +32,19 @@ if ($rs->num_rows>0){
     <tbody>
     <tr>
         <form name="formAdd" action="table_list.php" method="post">
-            <input type="hidden" name="id_Edit" value="<?php echo $SP["id"]?>">
+            <input type="hidden" name="id_Edit" value="<?php echo $SP[0]["id"]?>">
 
             <th scope="row">
-                <input placeholder="TenSP" name="TenSP_Edit" value="<?php echo $SP["name"]?>">
+                <input placeholder="TenSP" name="TenSP_Edit" value="<?php echo $SP[0]["name"]?>">
             </th>
             <td>
-                <input placeholder="Gia" name="Gia_Edit" value="<?php echo $SP["price"]?>">
+                <input placeholder="Gia" name="Gia_Edit" value="<?php echo $SP[0]["price"]?>">
             </td>
             <td>
-                <input placeholder="Mo ta" name="Mota_Edit" value="<?php echo $SP["desct"]?>">
+                <input placeholder="Mo ta" name="Mota_Edit" value="<?php echo $SP[0]["desct"]?>">
             </td>
             <td>
-                <input placeholder="TenNCC" name="NCC_Edit" value="<?php echo $SP["ncc"]?>">
+                <input placeholder="TenNCC" name="NCC_Edit" value="<?php echo $SP[0]["ncc"]?>">
             </td>
             <button style="
                     background-color: darkblue;
