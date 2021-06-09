@@ -1,3 +1,3 @@
 <?php
 session_start();
-if(!isset($_SESSION["giohang"])) $_SESSION["giohang"]=[];
+if(!isset($_SESSION["cart"])) $_SESSION["cart"]=[];

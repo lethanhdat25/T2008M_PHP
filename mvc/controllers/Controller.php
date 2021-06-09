@@ -1,5 +1,5 @@
 <?php
-
+include "views/session.php";
 include_once "databaseSP.php";
 class Controller
 {
@@ -7,11 +7,15 @@ class Controller
     public function Giohang($a){
         echo $a;
         if (isset($a)) {
-            $ds = querydb("select * from product where id = $a");
+            $giohang = $_SESSION["cart"];
+            $id = $a;
+            $ds = querydb("select * from product where id = $id");
             $sp = $ds[0];
+            if(!in_array($sp,$giohang)){ // Kiểm tra trong mảng đã có phần tử này chưa
                 $giohang[] = $sp;
                 $_SESSION["giohang"] = $giohang;
-            header("Location: ?route=giohang");
+            }
+            header("Location: danhsachgiohang.php");
         }
         include "views/danhsachgiohang.php";
     }

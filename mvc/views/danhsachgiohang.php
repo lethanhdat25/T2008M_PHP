@@ -6,7 +6,7 @@
 <body>
 
 <h1>Danh sách GH</h1>
-<?php  $ds = $_SESSION["giohang"]; ?>
+<?php  $ds = $_SESSION["cart"]; ?>
     <table class="table">
         <thead>
         <tr>
