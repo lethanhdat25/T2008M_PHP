@@ -10,8 +10,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>List SV</h1>
-    <a href="?route=themsp">ThemSv</a>
+    <?php include_once "navbar_table_list.php"?>
     <table class="table">
         <thead>
         <tr>
@@ -27,7 +26,7 @@
                 <th scope="row"><?php echo $ds["name"] ?></th>
                 <td><?php echo $ds["price"] ?></td>
                 <td><?php echo $ds["description"] ?>
-                    &ensp;<a href="">Sua San Pham</a>
+                    &ensp;<a href="?suaSpid=<?php echo $ds["id"] ?>">Sua San Pham</a>
                     &ensp;<a href="?giohangid=<?php echo $ds["id"] ?>">Them Gio Hang</a>
                 </td>
             </tr>

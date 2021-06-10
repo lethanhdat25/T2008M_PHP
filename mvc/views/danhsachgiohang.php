@@ -13,7 +13,6 @@
             <th scope="col">TenSP</th>
             <th scope="col">Gia</th>
             <th scope="col">Mota</th>
-            <th scope="col">Ten nha cung cap</th>
         </tr>
         </thead>
         <tbody>
@@ -27,7 +26,6 @@
         <?php } ?>
         <tr>
             <th scope="row"></th>
-            <td></td>
             <td></td>
             <td> Tong tien:  <?php echo $total ?> </td>
         </tr>

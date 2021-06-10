@@ -5,7 +5,6 @@ class Controller
 {
 
     public function Giohang($a){
-        echo $a;
         if (isset($a)) {
             $giohang = $_SESSION["cart"];
             $id = $a;
@@ -13,9 +12,10 @@ class Controller
             $sp = $ds[0];
             if(!in_array($sp,$giohang)){ // Kiểm tra trong mảng đã có phần tử này chưa
                 $giohang[] = $sp;
-                $_SESSION["giohang"] = $giohang;
+                $_SESSION["cart"] = $giohang;
+            }else{
+
             }
-            header("Location: danhsachgiohang.php");
         }
         include "views/danhsachgiohang.php";
     }
@@ -38,5 +38,35 @@ class Controller
             }
 
         }
+    }
+    public function SuaSp($a){
+        include_once "views/suaSP.php";
+    }
+    public function UpdateSp()
+    {
+        if (isset($_POST['id_Edit'])) {
+            $id_Edit = $_POST['id_Edit'];
+            echo $id_Edit;
+        }
+
+        if (isset($_POST['TenSP_Edit'])) {
+            $tensp_Edit = $_POST['TenSP_Edit'];
+            echo $tensp_Edit;
+        }
+        if (isset($_POST['Gia_Edit'])) {
+            $gia_Edit = $_POST['Gia_Edit'];
+            echo $gia_Edit;
+        }
+        if (isset($_POST['Mota_Edit'])) {
+            $mota_Edit = $_POST['Mota_Edit'];
+            echo $mota_Edit;
+        }
+
+        //Update
+            $sql3_text = "update product set name ='$tensp_Edit',price=$gia_Edit,description='$mota_Edit' where id=$id_Edit";
+            if (connect()->query($sql3_text) == true) {
+                $this->Listsp();
+
+            }
     }
 }
